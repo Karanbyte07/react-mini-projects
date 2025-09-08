@@ -11,7 +11,7 @@ function App() {
   const passwordGenerator = useCallback(() => {
     let pass = "";
     let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-    if (numberAllowed) str += "0123456789"  //agar number allowed h toh me number add kr dunga string me
+    if (numberAllowed) str += "0123456789"  //agar number allowed h toh number me add kr dunga string me
     if (charAllowed) str += "!@#$%^&*()+-"
 
     //to generate random password
