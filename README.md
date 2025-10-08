@@ -84,16 +84,6 @@ Common scripts (per project):
 - Persistence: `localStorage` for state survival
 - Tooling: Vite project structure, dev/build scripts, Tailwind integration
 
-## Screenshots (optional)
-
-Add screenshots to each project folder and reference them here, for example:
-
-- 04reactrouter: the folder already contains images like `hero.jpg`, `img1.jpg`, etc.
-- You can add `screenshot.png` to other folders and embed them:
-
-```md
-![Password Generator](./02passwordGenerator/screenshot.png)
-```
 
 ## Notes and tips
 
