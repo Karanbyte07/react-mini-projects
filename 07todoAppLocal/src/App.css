@@ -1,0 +1,223 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+/* =============================
+   Neumorphism UI Theme (Light/Dark aware)
+   ============================= */
+:root {
+  --bg: #e9eef5;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --accent: #6c63ff;      /* indigo */
+  --accent-2: #ff6b9a;    /* pink */
+  --success: #22c55e;
+  --lightShadow: -10px -10px 20px #ffffff;
+  --darkShadow: 10px 10px 24px #c9d2e3;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f172a;      /* slate-950 */
+    --text: #e5e7eb;    /* gray-200 */
+    --muted: #94a3b8;   /* slate-400 */
+    --accent: #8b5cf6;  /* violet-500 */
+    --accent-2: #f472b6;/* pink-400 */
+    --success: #22c55e;
+    --lightShadow: -8px -8px 16px rgba(255, 255, 255, 0.08);
+    --darkShadow: 8px 8px 20px rgba(0, 0, 0, 0.55);
+  }
+}
+
+/* Layout */
+.app-shell {
+  min-height: 100vh;
+  width: 100%;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 100%;
+  max-width: 820px;
+}
+
+.title {
+  text-align: center;
+  margin: 0 0 1.5rem;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  font-size: clamp(1.75rem, 1.1rem + 2vw, 2.5rem);
+  background: linear-gradient(90deg, #06b6d4, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Neumorphic Surfaces */
+.neo-surface {
+  background: var(--bg);
+  color: var(--text);
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: var(--lightShadow), var(--darkShadow);
+}
+
+.neo-inset {
+  box-shadow: inset var(--lightShadow), inset var(--darkShadow);
+}
+
+/* Form */
+.form-row {
+  display: flex;
+  gap: 12px;
+}
+
+.neo-input {
+  background: var(--bg);
+  color: var(--text);
+  border: none;
+  padding: 0.9rem 1rem;
+  border-radius: 16px;
+  box-shadow: inset var(--lightShadow), inset var(--darkShadow);
+  outline: none;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.neo-btn {
+  appearance: none;
+  border: none;
+  border-radius: 16px;
+  padding: 0.9rem 1.2rem;
+  background: var(--bg);
+  color: var(--text);
+  box-shadow: var(--lightShadow), var(--darkShadow);
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.neo-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.02);
+}
+
+.neo-btn:active {
+  transform: translateY(0);
+  box-shadow: inset var(--lightShadow), inset var(--darkShadow);
+}
+
+.neo-btn-primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #ffffff;
+  box-shadow: 0 10px 20px rgba(108, 99, 255, 0.25);
+}
+
+/* Todo list */
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: var(--bg);
+  box-shadow: var(--lightShadow), var(--darkShadow);
+}
+
+.todo-item.completed {
+  opacity: 0.85;
+}
+
+.todo-text {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-size: 1rem;
+  border-radius: 12px;
+  padding: 6px 8px;
+}
+
+.todo-text.editing {
+  box-shadow: inset var(--lightShadow), inset var(--darkShadow);
+}
+
+.icon-btn {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: var(--bg);
+  box-shadow: var(--lightShadow), var(--darkShadow);
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.icon-btn:hover {
+  transform: translateY(-1px);
+}
+
+.icon-btn:active,
+.icon-btn[disabled] {
+  box-shadow: inset var(--lightShadow), inset var(--darkShadow);
+}
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--accent);
+}
