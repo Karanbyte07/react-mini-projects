@@ -16,11 +16,13 @@ function App() {
 
     //to generate random password
     for (let i = 1; i <= length; i++) {
-      let char = Math.floor(Math.random() * str.length + 1)
+      let char = Math.floor(Math.random() * str.length + 1) 
+      //math.random() * str.length gives 0 to str.length-1 tak ka number dega
+      //+1 isliye kiya taki last character bhi include ho jaye
       pass += str.charAt(char);
     }
     setPassword(pass)
-  }
+  }  
     , [length, numberAllowed, charAllowed, setPassword])
 
   const copytoclipboard = useCallback(()=> {
