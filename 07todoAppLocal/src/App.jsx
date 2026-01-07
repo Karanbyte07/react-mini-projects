@@ -15,6 +15,7 @@ function App() {
   const updateTodo = (id, newTodo) => { // map through todos and update the one with the given id
     setTodos((prev) => prev.map((prevTodo) => (prevTodo.id === id ? newTodo : prevTodo)))
   }
+  
 
   const deleteTodo = (id) => { // filter out the todo with the given id and new array without that todo
     setTodos((prev) => prev.filter((todo) => todo.id !== id))
