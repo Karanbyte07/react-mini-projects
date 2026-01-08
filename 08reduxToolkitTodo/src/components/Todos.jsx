@@ -25,7 +25,7 @@ function Todos() {
 
   return (
     <>
-      <div>Todos</div>
+      <div className="text-white text-2xl font-semibold mb-4 mt-8">Todos</div>
       <ul className="list-none">
         {todos.map((todo) => (
           <li
@@ -37,7 +37,7 @@ function Todos() {
                     type="text"
                     value={editText}
                     onChange={(e) => setEditText(e.target.value)}
-                    className="flex-1 px-2 py-1 rounded text-white"
+                    className="flex-1 px-2 py-1 rounded text-black bg-white"
                     autoFocus
                 />
             ) : (
