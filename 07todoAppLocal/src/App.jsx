@@ -13,12 +13,12 @@ function App() {
   }
 
   const updateTodo = (id, newTodo) => { // map through todos and update the one with the given id
-    setTodos((prev) => prev.map((prevTodo) => (prevTodo.id === id ? newTodo : prevTodo)))
+    setTodos((prev) => prev.map((prevTodo) => (prevTodo.id === id ? newTodo : prevTodo)))//map krke saare todos ko check kr lo, jiska id match krta h usko newTodo se replace kr do
   }
   
 
-  const deleteTodo = (id) => { // filter out the todo with the given id and new array without that todo
-    setTodos((prev) => prev.filter((todo) => todo.id !== id))
+  const deleteTodo = (id) => { // filter out the todo with the given id and created new array without that todo
+    setTodos((prev) => prev.filter((todo) => todo.id !== id))// us todo ko exclude krke new array bna do
   }
 
   const toggleComplete = (id) => { // toggle the completed status of the todo with the given id
