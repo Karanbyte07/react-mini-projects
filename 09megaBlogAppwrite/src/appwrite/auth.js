@@ -1,5 +1,5 @@
-import config from '../config/config.js';
-import { Client, Account } from 'appwrite';
+import config from '../config/config.js'; //import config object to access Appwrite configuration values
+import { Client, Account } from 'appwrite'; 
 
 //create class AuthService for easier management of authentication
 export class AuthService {
