@@ -11,13 +11,13 @@ function header() {
   const navItems = [
     {
       name: 'Home',
-      slug: '/',
-      active: true
+      slug: '/', //url ka path
+      active: true //always show home link
     },
     {
       name: 'Login',
       slug: '/login',
-      active: !authStatus
+      active: !authStatus //show login link only when user is not logged in
     },
     {
       name: 'Signup',
@@ -42,21 +42,21 @@ function header() {
       <Container>
         <nav className='flex'>
           <div className='mr-4'>
-            <Link to="/"> 
+            <Link to="/">
               <Logo width="70px" />
             </Link>
           </div>
           <ul className='flex ml-auto'>
             {navItems.map((item) => item.active ? (
               <li key={item.name}>
-                <button onClick={() => navigate(item.slug)} 
+                <button onClick={() => navigate(item.slug)}
                   className='inline-block px-6 py-2 duration-200 hover:bg-blue-100 rounded-full'
                 >{item.name}
                 </button>
               </li>
             ) : null)}
             {/* show log out button when the user is logged in */}
-            {authStatus && (  <li><LogoutBtn/></li>   )} 
+            {authStatus && (<li><LogoutBtn /></li>)}
           </ul>
         </nav>
 
