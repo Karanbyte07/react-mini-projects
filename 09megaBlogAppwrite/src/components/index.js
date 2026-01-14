@@ -4,7 +4,7 @@ import Logo from './logo.jsx'
 import Container from './container/container.jsx'
 import LogoutBtn from './header/logoutBtn.jsx'
 
-export {
+export  {
     Header,
     Footer,
     Logo,

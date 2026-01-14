@@ -41,6 +41,35 @@ function Login() {
                         Sign up
                     </Link>
                 </p>
+                {error && <p className='mt-8 text-center  text-red-600'>{error}</p>}
+                <form onSubmit={handleSubmit(login)} className='mt-8'>
+                    <div className='space-y-5'>
+                        <Input
+                             label="Email address"
+                             type="email"
+                             placeholder="Enter email to get started"
+                             {...register("email", { //spread operator to register input field with react-hook-form
+                                 required: true, 
+                                 validate: { //options for custom validation
+                                        matchPattern: (value) => {return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value) || "Invalid email address"}
+                                  }
+                             })}
+                        />
+                        <Input
+                                label = "Password"
+                                type = "password"
+                                placeholder = "Enter your password"
+                                {...register("password", 
+                                    {
+                                        required: true,
+                                    }
+                                )}
+                        
+                        />
+                        <Button type="submit" className="w-full">Sign In</Button>
+                    </div>
+
+                </form>
             </div>
         </div>
     )

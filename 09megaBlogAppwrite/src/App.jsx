@@ -33,9 +33,11 @@ function App() {
       <div className='w-full block'>
         <h1 className='text-4xl text-center text-white py-10'>Mega Blog Appwrite</h1>
         <Header/>
+        <Container>
         <main>
           {/* to do<Outlet/> */}
         </main>
+        </Container>
         <Footer />
       </div>
     </div>
