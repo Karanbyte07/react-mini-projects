@@ -5,7 +5,7 @@ import service from "../../appwrite/confService.js";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-function postForm(post) {
+function postForm(post) { //agar post h to edit karne ke liye hoga otherwise new post create karne ke liye hoga
     const { register, handleSubmit, control, watch, setValue, getValues } = useForm(
         {
             defaultValues: { //post ke andar jo data h wo aa jayega agar edit kar rahe h to
@@ -20,26 +20,26 @@ function postForm(post) {
     const navigate = useNavigate();
     const userData = useSelector((state) => state.auth.userData); //redux se user data le rahe h
 
-    //if we have post 
+    //if we have post then we will update otherwise create new post
     const submit = async (data) => {
-        if (post) { //agar post 
+        if (post) { //agar post h to update karna h
             const file = data.image[0] ? service.uploadFile(data.image[0]) : null;
 
-            if (file) {
+            if (file) { //agar new file upload ki h to purani wali delete kr do
                 service.deleteFile(post.featuredImage)
             }
 
-            const dbPost = await service.updatePost(post.$id, {
+            const dbPost = await service.updatePost(post.$id, { //save kr do update post to the database
                 ...data,
                 featuredImage: file ? file.$id : undefined,
             })
 
 
-            //agar db post aa gya toh navigate kr do
+          {/* agar db post aa gya toh navigate kr do */}
             if (dbPost) {
                 navigate(`/post/${dbPost.slug}`);
             }
-        } else {
+        } else { //new post create karna h
             const file = data.image[0] ? await service.uploadFile(data.image[0]) : null;
 
             if (file) {
@@ -56,20 +56,21 @@ function postForm(post) {
         }
     }
 
+    //function to transform title to slug matlab jo title h usko slug me convert kr dega slug matlab jo url 
     const slugTransform = useCallback((value) => {
         if(value && typeof value === "string") {
             return value
-            .trim()
+            .trim() //remove spaces from start and end
             .toLowerCase()
-            .replace(/^[a-zA-Z\d\s]+/g, '-')
-            .replace(/\s/g, '-')
+            .replace(/^[a-zA-Z\d\s]+/g, '-') //replace special chars with hyphen
+            .replace(/\s/g, '-') //replace spaces with hyphen
         }
         return ""
     }, [])
 
     React.useEffect(() => {
         const subscription = watch((value, { name }) => {
-            if(name === "title") {
+            if(name === "title") { //agar title change hota h to slug ko update kar do
                 const slug = slugTransform(value.title);
                 setValue("slug", slug, {shouldValidate: true});
             }
@@ -130,3 +131,28 @@ function postForm(post) {
 }
 
 export default postForm
+
+
+// 1. USER ACTIONS
+//    - Types title → Auto-generates slug
+//    - Types content in RTE
+//    - Uploads image
+//    - Selects status
+//    - Clicks Submit
+
+// 2. FORM COLLECTS DATA
+//    {
+//        title: "My Blog",
+//        slug: "my-blog",
+//        content: "<p>Rich HTML content...</p>",
+//        status: "active",
+//        image: [File object]
+//    }
+
+// 3. SUBMIT FUNCTION
+//    - Uploads image to Appwrite
+//    - Creates/Updates post in database
+//    - Adds userId to new posts
+
+// 4. REDIRECT
+//    - Navigate to post page on success
