@@ -12,6 +12,7 @@ import PostCard from './postCard.jsx'
 import SignUp from './signup.jsx'
 import Login from './login.jsx'
 import AuthLayout from './authLayout.jsx'
+import AllPosts from './pages/AllPosts.jsx'
 
 export  {
     Header,
@@ -27,5 +28,6 @@ export  {
     PostCard,
     SignUp,
     Login,
-    AuthLayout
+    AuthLayout,
+    AllPosts
 }

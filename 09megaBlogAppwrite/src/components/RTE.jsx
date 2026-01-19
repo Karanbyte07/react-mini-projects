@@ -14,6 +14,7 @@ export default function RTE({name, control, label, defaultValue =""}) {
     control={control}
     render={({field: {onChange}}) => (
         <Editor //from tinymce ka editor component 
+        apiKey='57v4e75nzgk2ttkxp2u45qlx7oczcgi2f6hedbyo8a2j5nh4'
         initialValue={defaultValue}
         init={{
             initialValue: defaultValue,

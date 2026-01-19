@@ -5,7 +5,7 @@ import service from "../../appwrite/confService.js";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-function postForm(post) { //agar post h to edit karne ke liye hoga otherwise new post create karne ke liye hoga
+function postForm({post}) { //agar post h to edit karne ke liye hoga otherwise new post create karne ke liye hoga
     const { register, handleSubmit, control, watch, setValue, getValues } = useForm(
         {
             defaultValues: { //post ke andar jo data h wo aa jayega agar edit kar rahe h to
@@ -23,7 +23,7 @@ function postForm(post) { //agar post h to edit karne ke liye hoga otherwise new
     //if we have post then we will update otherwise create new post
     const submit = async (data) => {
         if (post) { //agar post h to update karna h
-            const file = data.image[0] ? service.uploadFile(data.image[0]) : null;
+            const file = data.image[0] ? await service.uploadFile(data.image[0]) : null;
 
             if (file) { //agar new file upload ki h to purani wali delete kr do
                 service.deleteFile(post.featuredImage)
@@ -48,6 +48,7 @@ function postForm(post) { //agar post h to edit karne ke liye hoga otherwise new
                 const dbPost = await service.createPost({
                     ...data,
                     userId: userData.$id,
+                    featuredImage: fileId,
                 })
                 if (dbPost) {
                     navigate(`/post/${dbPost.$id}`);
@@ -62,8 +63,9 @@ function postForm(post) { //agar post h to edit karne ke liye hoga otherwise new
             return value
             .trim() //remove spaces from start and end
             .toLowerCase()
-            .replace(/^[a-zA-Z\d\s]+/g, '-') //replace special chars with hyphen
-            .replace(/\s/g, '-') //replace spaces with hyphen
+            .replace(/[^a-zA-Z\d\s]+/g, '-') //replace special chars with hyphen
+            .replace(/\s+/g, '-') //replace spaces with hyphen
+            .replace(/^-+|-+$/g, '') //remove leading/trailing hyphens
         }
         return ""
     }, [])
@@ -106,10 +108,10 @@ function postForm(post) { //agar post h to edit karne ke liye hoga otherwise new
                     accept="image/png, image/jpg, image/jpeg, image/gif"
                     {...register("image", { required: !post })}
                 />
-                {post && (
+                {post && post.featuredImage && ( //agar post h aur usme featured image h to usko show kar do
                     <div className="w-full mb-4">
                         <img
-                            src={appwriteService.getFilePreview(post.featuredImage)}
+                            src={service.getFilePreview(post.featuredImage)}
                             alt={post.title}
                             className="rounded-lg"
                         />

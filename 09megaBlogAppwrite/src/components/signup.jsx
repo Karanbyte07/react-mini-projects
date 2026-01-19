@@ -40,7 +40,8 @@ function Signup() {
                         Sign in
                     </Link>
                 </p>
-                {error && <p className='mt-8 text-center  text-red-600'>{error}</p>} //display error if any
+                {/* display error if any */}
+                {error && <p className='mt-8 text-center  text-red-600'>{error}</p>} 
                 <form onSubmit={handleSubmit(signup)}> {/* react-hook-form ka handleSubmit function jo form submission ko handle krta hai */}
                     <div className="space-y-5">
                         <Input //input field for name

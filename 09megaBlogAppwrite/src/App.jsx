@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import authService from './appwrite/auth.js' 
 import {login, logout} from './features/authSlice.js'
-import{Header, Footer} from './components/index.js'
+import{Header, Footer, Container} from './components/index.js'
 import './App.css'
+import { Outlet } from 'react-router-dom'
+// this is testing
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -36,6 +38,7 @@ function App() {
         <Container>
         <main>
           {/* to do<Outlet/> */}
+          <Outlet/>
         </main>
         </Container>
         <Footer />

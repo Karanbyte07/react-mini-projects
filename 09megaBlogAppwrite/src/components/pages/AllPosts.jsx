@@ -1,9 +1,8 @@
 import React, {useState, useEffect} from 'react'
-import {PostCard} from '../index'
+import {PostCard, Container} from '../index'
 import Service from '../../appwrite/confService'
-import Container from '../index'
 
-function AllPosts() {
+export default function AllPosts() {
     const [posts, setPosts] = useState([]);
     useEffect(() => {
         Service.getPosts().then((posts) => { 
@@ -27,5 +26,3 @@ function AllPosts() {
         </div>
     );
 }
-
-export default AllPosts

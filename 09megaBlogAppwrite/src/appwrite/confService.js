@@ -1,5 +1,5 @@
 import config from '../config/config.js';
-import { Client, Databases, Storage } from 'appwrite';
+import { Client, Databases, Storage, ID, Query } from 'appwrite';
 
 
 export class Service {
@@ -89,12 +89,14 @@ export class Service {
 
     //method to get all post with query that is the post which has status active
     async getPosts(queries = [Query.equal('status', 'active')]){
+       
         try {
-            await this.database.listDocuments(
+            return await this.database.listDocuments(
                 config.appwriteDatabaseId,
                 config.appwriteCollectionId,
                 queries
             )
+             
         } catch (error) {
             console.log("appwrite service :: getPosts :: error :: ", error);
             return false;
@@ -109,7 +111,7 @@ export class Service {
     async uploadFile(file){
         try {
             return await this.bucket.createFile(
-                appwriteBucketId,
+                config.appwriteBucketId,
                 ID.unique(), //unique file ID
                 file 
             )
@@ -123,7 +125,7 @@ export class Service {
     async deleteFile(fileId){
         try {
             await this.bucket.deleteFile(
-                appwriteBucketId,
+                config.appwriteBucketId,
                 fileId
             )
             return true;
@@ -136,7 +138,7 @@ export class Service {
     //get file preview
     getFilePreview(fileId){
         return this.bucket.getFilePreview(
-            appwriteBucketId,
+            config.appwriteBucketId,
             fileId
         )
     }

@@ -1,5 +1,5 @@
 import config from '../config/config.js'; //import config object to access Appwrite configuration values
-import { Client, Account } from 'appwrite'; 
+import { Client, Account, ID } from 'appwrite';
 
 //create class AuthService for easier management of authentication
 export class AuthService {
@@ -12,35 +12,34 @@ export class AuthService {
             .setProject(config.appwriteProjectId); // Your project ID
         this.account = new Account(this.client);
     }
-
+    
     //method to create a new user account
-    async createAccount(email, password, name) {
-        try{
+    async createAccount({email, password, name}) {
+        try {
             const userAccount = await this.account.create(ID.unique(), email, password, name);
 
-            if(userAccount){
+            if (userAccount) {
                 //if user account is created successfully, log the user in
-                return await this.login(email, password);
+                return await this.login( {email, password} );
             }
             else {
                 throw new Error('Account creation failed');
             }
-        }
-        catch (error){
-            throw error;
-        }
-    }
-
-    //method to create a login 
-    async login(email, password) {
-        try {
-            return await this.account.createSession(email, password);
         }
         catch (error) {
             throw error;
         }
     }
 
+    //method to create a login session
+    async login({email, password}) {
+        try {
+             return await this.account.createEmailPasswordSession(email, password);
+        }
+        catch (error) {
+            throw error;
+        }
+    }
     //method to get the currently logged-in user
     async getCurrentUser() {
         try {
@@ -53,16 +52,18 @@ export class AuthService {
         return null;
     }
 
+
+
     //method to log out the current user
     async logout() {
         try {
-            return await this.account.deleteSessions();
+            return await this.account.deleteSession('current');
         }
         catch (error) {
             throw error;
         }
     }
-} 
+}
 
 const authService = new AuthService(); //create an instance(object) of AuthService
 
