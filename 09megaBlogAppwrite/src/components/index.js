@@ -12,7 +12,7 @@ import PostCard from './postCard.jsx'
 import SignUp from './signup.jsx'
 import Login from './login.jsx'
 import AuthLayout from './authLayout.jsx'
-import AllPosts from './pages/AllPosts.jsx'
+import AllPosts from '../components/pages/AllPosts.jsx'
 
 export  {
     Header,

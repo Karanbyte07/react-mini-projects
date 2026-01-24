@@ -25,6 +25,7 @@ export class Service {
                 slug, //using slug as document ID
                 {
                     title,
+                    slug,
                     content,
                     featuredImage,
                     status,
@@ -137,10 +138,13 @@ export class Service {
 
     //get file preview
     getFilePreview(fileId){
-        return this.bucket.getFilePreview(
+        if (!fileId) {
+            return null; // missing id, let caller decide how to render
+        }
+        return this.bucket.getFileView(
             config.appwriteBucketId,
             fileId
-        )
+        );
     }
 
 }
